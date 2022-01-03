@@ -1,11 +1,20 @@
 package com.spartenportal.entity;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -43,6 +52,7 @@ public class User{
 	@Column(name = "place")
 	private String place;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birthDate")
 	private Date birthDate;
@@ -270,6 +280,7 @@ public class User{
 	@Column(name = "cert_Version")
 	private String cert_Version;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "cert_Date")
 	private Date cert_Date;
@@ -406,6 +417,7 @@ public class User{
 	@Column(name = "expectedCTC")
 	private Integer expectedCTC;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "joinTime")
 	private Date joinTime;
@@ -465,10 +477,12 @@ public class User{
 	@Column(name = "issuePlace")
 	private String issuePlace;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "issueDate")
 	private Date issueDate;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "expiryDate")
 	private Date expiryDate;
@@ -488,6 +502,7 @@ public class User{
 	@Column(name = "app_Place")
 	private String app_Place;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "app_Date")
 	private Date app_Date;
@@ -504,10 +519,12 @@ public class User{
 	@Column(name = "isActive")
 	private Boolean isActive;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "currentDate")
 	private Date currentDate;
 	
+	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "modifyDate")
 	private Date modifyDate;
@@ -515,9 +532,22 @@ public class User{
 	@Column(name = "clientCompanyName")
 	private String clientCompanyName;
 	
-
+	@ManyToMany(targetEntity = Roles.class , cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+	@JoinTable(name = "userRole" ,
+			   joinColumns = @JoinColumn (name = "usersId" , referencedColumnName = "userid") ,
+			   inverseJoinColumns = @JoinColumn(name = "roleId" , referencedColumnName = "roleId"))
+	private List<Roles> roles;
+	
 	public Integer getUserid() {
 		return userid;
+	}
+
+	public List<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
 	}
 
 	public String getClientCompanyName() {

@@ -1,8 +1,9 @@
 package com.spartenportal.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -23,9 +26,11 @@ public class Docs {
 	private String docName;
 	private String docType;
 
-	@Lob
-	private byte[] data;
+	private String docPath;
 
+	@Temporal(TemporalType.DATE)
+	private Date uploadDate;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="userid")
 	private User user;
@@ -33,12 +38,7 @@ public class Docs {
 	public Docs() {
 	}
 
-	public Docs(String docName, String docType, byte[] data) {
-		super();
-		this.docName = docName;
-		this.docType = docType;
-		this.data = data;
-	}
+	
 
 	public Integer getDocId() {
 		return docId;
@@ -72,11 +72,19 @@ public class Docs {
 		this.docType = docType;
 	}
 
-	public byte[] getData() {
-		return data;
+	public String getDocPath() {
+		return docPath;
 	}
 
-	public void setData(byte[] data) {
-		this.data = data;
+	public void setDocPath(String docPath) {
+		this.docPath = docPath;
+	}
+
+	public Date getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(Date uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 }

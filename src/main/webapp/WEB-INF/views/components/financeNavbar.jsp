@@ -18,7 +18,6 @@ body {
 	top: 0;
 	width: 100%;
 	height: 60px;
-	z-index: 9999;
 }
 
 .navbar a {
@@ -36,35 +35,31 @@ body {
 	height: 1500px; /* Used in this example to enable scrolling */
 }
 </style>
-<body>	
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<body>
+
 	<div class="navbar">
 	<div style="position: absolute;left: 5px; top: -17px;">
   <a href="#"><img src="../images/krios-icon.png" width="120px" style="padding-top:8px"></a></div>
-  <div style="position: absolute;left: 115px; top: 7px;">
+  <div style="position: absolute;left: 103px; top: 7px;">
     <ul style="
     color: #42B5F4;">
       <li>
-        <a  href="/userDashboard">
+        <a  href="/financePanel">
           <span class="glyphicon glyphicon-home"></span>
           Home
           </a>
-        <a href="/editUser">
+        <a href="/financeUserList">
           <span class="glyphicon glyphicon-list-alt"></span>
-          Employement Form
+          Employee
         </a>
-        <a href="/doc">
-          <span class="glyphicon glyphicon-folder-open"></span>&nbsp; Documents
-        </a>
-        <a href="/viewPolicy"><span class="glyphicon glyphicon-book"></span> Policies</a>
-        <c:set var = "cname" scope="session" value = "${companyName}"/>
-      <c:if test = "${not empty cname}">
-        <a href="/AttendanceSheet">
-         <span class="glyphicon glyphicon-file"></span>
-          Attendance Sheet
-        </a>	
-        </c:if>  
+       
       </li>
+     <!--<li >
+        <a href="#">
+          <i class="fa fa-vcard"></i>
+          Raise Ticket
+        </a>
+      </li>-->
   </ul>
   </div>
       <div style="position: absolute; right: 5px; top: 7px;">
@@ -73,7 +68,12 @@ body {
          ${firstName}
         </a>
         <a class="dropdown-item" href="/logout"><span class="glyphicon glyphicon-log-out"></span>&nbspLogout</a>
-
+        <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/logout">Logout</a>
+          <a class="dropdown-item" href="#">About</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Contact-Us</a>
+        </div> -->
       </div>
   </div>
 
